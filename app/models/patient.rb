@@ -1,6 +1,9 @@
 class Patient < ApplicationRecord
     attribute :name, :string
     attribute :email, :string
-    attribute :country_name, :string
-    validates_presence_of :name, :email, :country_name
+    attribute :timezone, :string
+
+    has_many :patient_medications
+    has_many :medications, through: :patient_medication_mapping
+    validates_presence_of :name, :email, :timezone
 end
