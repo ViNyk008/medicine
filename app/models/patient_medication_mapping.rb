@@ -1,6 +1,8 @@
 class PatientMedicationMapping < ApplicationRecord
     require 'sidekiq/cron/job'
 
+    serialize :prescription_data, JSON
+
     attribute :doctor_id, :uuid
     attribute :patient_id, :uuid
     attribute :prescription_data
@@ -12,6 +14,12 @@ class PatientMedicationMapping < ApplicationRecord
 
 
     after_commit: trigger_schedular
+
+    private
+
+    def set_id
+        self.id = SecureRandom.hex(16)
+    end
 
     def valid_prescription_data_structure
         if prescription_data.present?
