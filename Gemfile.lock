@@ -249,6 +249,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-cron
   turbolinks (~> 5)
+  tzinfo
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
