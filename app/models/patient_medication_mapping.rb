@@ -12,7 +12,7 @@ class PatientMedicationMapping < ApplicationRecord
     
     validate :valid_prescription_data_structure
 
-
+    before_create :set_id
     after_commit: trigger_schedular
 
     private

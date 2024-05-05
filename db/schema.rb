@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2024_05_04_172316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "patient_medication_mapping", id: :string, force: :cascade do |t|
+  create_table "patient_medication_mappings", id: :string, force: :cascade do |t|
     t.string "patient_id"
     t.string "doctor_id"
     t.string "medicine_id"
