@@ -20,6 +20,10 @@ gem 'jbuilder', '~> 2.7'
 # sidekiq for async jobs
 gem 'sidekiq'
 gem 'sidekiq-cron'
+
+#to get timezone
+gem 'tzinfo'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
