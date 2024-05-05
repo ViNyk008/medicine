@@ -21,10 +21,15 @@ gem 'jbuilder', '~> 2.7'
 gem 'sidekiq'
 gem 'sidekiq-cron'
 
+gem 'redis'
+gem 'redlock'
+gem 'redis-namespace'
+
 #to get timezone
 gem 'tzinfo'
 
 gem 'mail'
+gem 'pry'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

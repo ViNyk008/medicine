@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2024_05_04_172316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "medicines", id: :string, force: :cascade do |t|
+  create_table "medications", id: :string, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2024_05_04_172316) do
   create_table "patient_medication_mappings", id: :string, force: :cascade do |t|
     t.string "patient_id"
     t.string "doctor_id"
-    t.string "medicine_id"
+    t.string "medication_id"
     t.text "prescription_data", default: "[]"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

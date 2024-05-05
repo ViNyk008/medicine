@@ -1,22 +1,22 @@
 class PatientMedicationMapping < ApplicationRecord
     require 'sidekiq/cron/job'
 
-    serialize :prescription_data, JSON
+    serialize :prescription_data
 
-    attribute :doctor_id, :uuid
-    attribute :patient_id, :uuid
+    attribute :doctor_id, :string
+    attribute :patient_id, :string
+    attribute :medication_id, :string
     attribute :prescription_data
 
-    belongs_to :patient
-    belongs_to :medication
+    belongs_to :patients
+    belongs_to :medications
     
     validate :valid_prescription_data_structure
 
     before_create :set_id
-    after_commit: trigger_schedular
+    after_commit :trigger_schedular
 
     private
-
     def set_id
         self.id = SecureRandom.hex(16)
     end
@@ -45,45 +45,54 @@ class PatientMedicationMapping < ApplicationRecord
     end
 
     def trigger_schedular
-        email = Patient.where(self.id).first.email
-        job_name = "medication_reminder_#{self.id}"
-        job = Sidekiq::Cron::job.new(
-                name: job_name,
-                cron: get_cron )
-                class: MedicationReminderWorker,
-                args: [email, med_name.to_s]
+        puts self.prescription_data
+        email = Patient.where(id: self.patient_id).first.email
+        prescription_data = eval(self.prescription_data)
+        prescription_data.first.each do |medication, details|
+            job_name = "medication_reminder_#{self.id}_#{medication}"
+                
+            cron = get_cron(details)
+            job = Sidekiq::Cron::job.new(
+                    name: job_name,
+                    cron: cron,
+                    class: MedicationReminderWorker,
+                    args: [email, med_name.to_s]
+            )
+        end
     end
 
     #to Get email sending time from prescription
-    def cron_expressions(prescription_data)             
-        medication_data.each_with_object([]) do |medication, cron_expressions|
-            medication.each do |med_name, schedule|
-                schedule.each do |frequency, timings|
-                    timings.each do |timing|
-                        cron_expression = case frequency
-                            when :daily
-                              convert_daily_timing_to_cron(timing)
-                            when :weekly
-                              convert_weekly_timing_to_cron(timing)
-                            else
-                              nil
-                            end
-                            cron_expressions << { medication: med_name, cron: cron_expression } if cron_expression
-                        end
-                    end
+    def get_cron(medication_details)
+        cron_expressions = []
+
+        medication_details.each do |frequency, timings|
+            timings.each do |timing|
+                cron_expression = case frequency
+                when :daily
+                    convert_daily_timing_to_cron(timing)
+                when :weekly
+                    convert_weekly_timing_to_cron(timing)
+                else
+                    Rails.logger.warn("Unsupported medication frequency: #{frequency}")
+                    nil
                 end
-            end
+                if cron_expression
+                    cron_expressions << { medication: med_name, cron: cron_expression }
+                end
+            end   
+        end
+        cron_expressions
     end
 
     # crons formatting
     def convert_daily_timing_to_cron(time)
-        hours, minutes = time.split(':').map(&:to_i)
+        hours, minutes = time.split(':')
         minutes -= 15
         "0 #{hours} #{minutes} * * *" 
     end
     def convert_weekly_timing_to_cron(day_time)
         day, time = day_time.first
-        hours, minutes = time.split(':').map(&:to_i)
+        hours, minutes = time.split(':')
         minutes -= 15
         "0 #{hours} #{minutes} * * #{day.to_s.capitalize}"
     end
