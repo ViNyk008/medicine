@@ -70,11 +70,13 @@ class PatientMedicationMapping < ApplicationRecord
     # crons formatting
     def convert_daily_timing_to_cron(time)
         hours, minutes = time.split(':').map(&:to_i)
+        minutes -= 15
         "0 #{hours} #{minutes} * * *" 
     end
     def convert_weekly_timing_to_cron(day_time)
         day, time = day_time.first
         hours, minutes = time.split(':').map(&:to_i)
+        minutes -= 15
         "0 #{hours} #{minutes} * * #{day.to_s.capitalize}"
     end
 end
