@@ -1,10 +1,17 @@
 class Doctor < ApplicationRecord
     attribute :name, :string
     attribute :email, :string
+    attribute :status, :string, default: "active"
+    attribute :specialization, :string, default: nil
+    attribute :phone_number, :string
 
     validates_presence_of :name, :email
+    validates_uniqueness_of :email
     validate :validate_email
-   
+    
+    has_many :prescriptions
+    has_many :patients, through: :prescriptions
+
     before_create :set_id
 
     private

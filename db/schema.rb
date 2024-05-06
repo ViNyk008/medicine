@@ -10,26 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_04_172316) do
+ActiveRecord::Schema.define(version: 2024_05_04_172527) do
 
   create_table "doctors", id: :string, force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "specialization"
+    t.string "phone_number"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "medications", id: :string, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "patient_medication_mappings", id: :string, force: :cascade do |t|
-    t.string "patient_id"
-    t.string "doctor_id"
-    t.string "medication_id"
-    t.text "prescription_data", default: "[]"
+    t.integer "serial_id"
+    t.string "description"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -38,6 +35,33 @@ ActiveRecord::Schema.define(version: 2024_05_04_172316) do
     t.string "name"
     t.string "email"
     t.string "country_code"
+    t.integer "age"
+    t.string "phone_number"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "prescriptions", id: :string, force: :cascade do |t|
+    t.string "patient_id"
+    t.string "doctor_id"
+    t.string "medication_id"
+    t.string "dosage"
+    t.string "frequency"
+    t.text "days", default: "[]"
+    t.text "time_per_day", default: "[]"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reminders", id: :string, force: :cascade do |t|
+    t.string "prescription_id"
+    t.datetime "reminder_time"
+    t.boolean "is_scheduled"
+    t.boolean "is_sent"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

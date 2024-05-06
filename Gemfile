@@ -31,6 +31,9 @@ gem 'tzinfo'
 gem 'mail'
 gem 'pry'
 
+gem 'mailjet'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

@@ -84,6 +84,8 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4-java)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -93,6 +95,9 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     jbuilder (2.12.0)
@@ -110,9 +115,16 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailjet (1.5.4)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2023.0218.1)
     mini_mime (1.1.5)
     minitest (5.22.3)
     net-imap (0.3.7)
@@ -124,6 +136,7 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.7.1-java)
     nokogiri (1.13.10-java)
       racc (~> 1.4)
@@ -182,6 +195,11 @@ GEM
     redlock (2.0.6)
       redis-client (>= 0.14.1, < 1.0.0)
     regexp_parser (2.9.0)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.2.6)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -225,6 +243,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2024.1)
       tzinfo (>= 1.0.0)
+    unf (0.1.4-java)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -255,6 +274,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mail
+  mailjet
   pry
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
