@@ -41,14 +41,13 @@ class Prescription < ApplicationRecord
                 
             end
         end
-    binding.pry
 
         if self.frequency == "weekly"
             (self.start_date.to_date..self.end_date.to_date).each do |date|
             next unless self.days.include?(date.wday) # Check if the day is included in the days array only that day will create on reminder
                 self.time_per_day.each do |per_day|
                     reminder_time_utc = DateTime.parse("#{date.to_s} #{per_day}")
-                    reminder_time_local = patient_timezone.utc_to_local(reminder_time_utc)
+                    reminder_time_local = reminder_time_utc.utc_to_local(reminder_time_utc)
                     reminder = Reminder.create!(create_reminder_params.merge(reminder_time: reminder_time_local, is_scheduled: false))
                 end
             end
@@ -59,7 +58,7 @@ class Prescription < ApplicationRecord
             next unless self.days.include?(date.day) # Check if the day is included in the days array
                 self.time_per_day.each do |per_day|
                     reminder_time_utc = DateTime.parse("#{date.to_s} #{per_day}")
-                    reminder_time_local = patient_timezone.utc_to_local(reminder_time_utc)
+                    reminder_time_local = reminder_time_utc.utc_to_local(reminder_time_utc)
                     reminder = Reminder.create!(create_reminder_params.merge(reminder_time: reminder_time_local, is_scheduled: false))
                 end
             end

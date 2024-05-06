@@ -1,2 +1,67 @@
-<h1>Medication Reminder</h1>
-<p>You have a medication reminder for <%= @medication_name %>  of dosage <%= @dosage %>. this has been prescribed by <%= @doctor_name %></p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Care! Medication Reminder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .content {
+      width: 100%;
+      margin: 10px 10px;
+      padding: 10px;
+      border-radius: 5px;
+      padding: 8px;
+    }
+
+    .header img {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      height: 250px;
+    }
+
+    .title {
+      font-size: 20px;
+      color: #333;
+    }
+
+    .info {
+      line-height: 1.5;
+    }
+
+    .info span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://cogoport-production.sgp1.digitaloceanspaces.com/2701530ee97ef34a7fb98ef4ec19e5a9/pexels-karolina-grabowska-4386467.jpg" alt="Medicine Capsules Image">
+    </div>
+    <div class="content">
+      <div>
+        <h1 class="title">Take Care! Medication Reminder</h1> 
+      </div>
+      <p class="info">
+        Hi there,
+        <br>
+        It's time to take your medication! You have a reminder for <span><%= @medication_name %></span> of dosage <span><%= @dosage %></span>. This has been prescribed by <span><%= @doctor_name %></span>.
+      </p>
+      <p>Remember, taking your medication as prescribed is crucial for your well-being. Wishing you a healthy day ahead!</p>
+      <p>Regards,</p>
+      <p>Your Medication Reminder</p>
+    </div>
+  </div>
+</body>

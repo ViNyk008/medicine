@@ -26,10 +26,10 @@ class Reminder < ApplicationRecord
         cron = get_cron()
         
         job_name = "medication_reminder_#{self.id}_#{self.reminder_time}"
-        binding.pry
+    
         job = Sidekiq::Cron::Job.new(
                     name: job_name,
-                    cron: cron,
+                    cron: get_cron,
                     class: MedicationReminderWorker,
                     args: [email, med_name.to_s,prescription.dosage, doctor_name]
             )

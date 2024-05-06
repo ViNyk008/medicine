@@ -5,6 +5,7 @@ class CreateReminders < ActiveRecord::Migration[6.1]
       t.datetime :reminder_time
       t.boolean :is_scheduled
       t.boolean :is_sent
+      t.boolean :status 
       t.timestamps
     end
   end

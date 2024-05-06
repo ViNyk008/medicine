@@ -43,13 +43,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address: 'in-v3.mailjet.com',
-    port: 587,
-    user_name: 'phoenixreborn008@gmail.com',
-    password: 'Suq7n5nZH7ML.vF',
-    host: '25bb-2401-4900-1c52-f148-617b-a4d0-7463-ab84.ngrok-free.app'
+    port: 2525,
+    user_name: '08887b08a8c070',
+    password: 'aedc18fd71cdc7',
+    address: 'sandbox.smtp.mailtrap.io',
+    domain: 'sandbox.smtp.mailtrap.io',
   }
-  config.action_mailer.default_url_options = { protocol: 'https', host: '25bb-2401-4900-1c52-f148-617b-a4d0-7463-ab84.ngrok-free.app', port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
