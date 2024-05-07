@@ -1,0 +1,19 @@
+<!-- prescription.html.erb -->
+<h1>New Prescription</h1>
+<%= form_with(url: '/create', method: 'post') do |form| %>
+  <div>
+    <%= form.label :medication_name, 'Medication Name:' %>
+    <%= form.text_field :medication_name %>
+  </div>
+  <div>
+    <%= form.label :dosage, 'Dosage:' %>
+    <%= form.text_field :dosage %>
+  </div>
+  <div>
+    <%= form.label :frequency, 'Frequency:' %>
+    <%= form.select :frequency, ['Daily', 'Weekly', 'Fortnightly', 'Monthly'] %>
+  </div>
+  <div>
+    <%= form.submit 'Save Prescription' %>
+  </div>
+<% end %>
